@@ -1,11 +1,10 @@
-
-import java.net.MalformedURLException;
-import java.net.URL;
-import javax.xml.namespace.QName;
-
 import localhost._12306.hello_world_soap_http.Greeter;
 import localhost._12306.hello_world_soap_http.SOAPService;
 import org.junit.Test;
+
+import javax.xml.namespace.QName;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 //how to reproduce the issue:
 //start moco, using the main_config.json
@@ -30,7 +29,7 @@ public class StopNettyTest {
             System.out.println(i + " start");
             port.sayHi();
             System.out.println(i + " end");
-//            java.lang.Thread.sleep(5000);
+            //java.lang.Thread.sleep(5000); //adding this sleep can get response
         }
     }
 }
