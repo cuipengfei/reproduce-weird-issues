@@ -9,15 +9,6 @@ then you should be able to see the second request fail
 interesting fact:
 
 the error only happens when we have those two things in pom:
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>2.5.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-transports-http</artifactId>
-            <version>2.5.2</version>
-        </dependency>
-        
+       cxf-rt-frontend-jaxws
+       cxf-rt-transports-http
 if we remove them, we can not reproduce the error anymore.
