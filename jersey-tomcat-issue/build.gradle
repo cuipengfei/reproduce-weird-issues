@@ -28,6 +28,9 @@ run {
 tomcatRun {
     httpPort = 12345
     contextPath = ''
+//    URIEncoding = "UTF-8"
+//    URIEncoding = "gb2312"
+    URIEncoding = "gbk"
 }
 
 repositories {
