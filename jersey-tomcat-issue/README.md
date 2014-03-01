@@ -6,7 +6,6 @@ if we start it in grizzly, we can get a correct result:
 
 3. we will get "hello 中文" as a result.
 
-
 but if we start it in tomcat, the encoding will mess the result up:
 
 1. gradle tomcatRun
