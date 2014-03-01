@@ -8,6 +8,6 @@ import static org.junit.Assert.assertThat;
 public class HelloTest {
     @Test
     public void testHello() throws Exception {
-        assertThat("hello", is("hello"));
+        assertThat("hello中文", is("hello中文"));
     }
 }
