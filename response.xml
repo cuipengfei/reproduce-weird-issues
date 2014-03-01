@@ -1,7 +1,0 @@
-<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
-    <SOAP-ENV:Body>
-        <sayHiResponse xmlns="http://localhost:12306/hello_world_soap_http/types">
-            <!--just empty response-->
-        </sayHiResponse>
-    </SOAP-ENV:Body>
-</SOAP-ENV:Envelope>

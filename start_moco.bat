@@ -1,1 +1,0 @@
-java -jar moco-runner-0.8.1-standalone.jar start -p 12306 -c main_config.json
