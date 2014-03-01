@@ -18,6 +18,6 @@ public class HelloResourceTest extends JerseyTest {
     @Test
     public void testHelloResource() throws Exception {
         String hello = target("hello").request().get(String.class);
-        assertThat(hello, is("hello"));
+        assertThat(hello, is("hello中文"));
     }
 }

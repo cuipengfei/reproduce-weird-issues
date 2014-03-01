@@ -7,6 +7,6 @@ import javax.ws.rs.Path;
 public class HelloResource {
     @GET
     public String hello() {
-        return "hello";
+        return "hello中文";
     }
 }
