@@ -1,0 +1,15 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+group = 'com.reproduce.gradle.encoding.issue'
+version = '1.0.0'
+
+ext.junitVersion = '4.11'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile "junit:junit:$junitVersion"
+}

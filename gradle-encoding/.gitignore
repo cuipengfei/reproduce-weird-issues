@@ -1,0 +1,6 @@
+.gradle/
+.idea/
+jersey-tomcat-issue.iml
+jersey-tomcat-issue.ipr
+jersey-tomcat-issue.iws
+build/
