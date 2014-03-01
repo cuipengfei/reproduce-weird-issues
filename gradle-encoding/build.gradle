@@ -5,11 +5,18 @@ group = 'com.reproduce.gradle.encoding.issue'
 version = '1.0.0'
 
 ext.junitVersion = '4.11'
+ext.jerseryVersion = '2.5.1'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    compile "javax.ws.rs:javax.ws.rs-api:2.0"
+    compile "org.glassfish.jersey.core:jersey-server:$jerseryVersion"
+
     testCompile "junit:junit:$junitVersion"
+    testCompile "org.glassfish.jersey.test-framework:jersey-test-framework-core:$jerseryVersion"
+    testCompile "org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-grizzly2:$jerseryVersion"
+    testCompile "org.glassfish.jersey.containers:jersey-container-grizzly2-http:$jerseryVersion"
 }
