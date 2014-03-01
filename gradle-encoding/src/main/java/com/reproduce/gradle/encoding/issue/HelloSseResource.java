@@ -17,7 +17,7 @@ public class HelloSseResource {
     public EventOutput hello() throws IOException {
         EventOutput eventOutput = new EventOutput();
         eventOutput.write(new OutboundEvent.Builder()
-                .name("hi").data(String.class, "hello")
+                .name("hi").data(String.class, "fake invoice content including 中文")
                 .build());
         return eventOutput;
     }

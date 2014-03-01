@@ -25,7 +25,9 @@ public class HelloSseResourceTest extends JerseyTest {
 
     @Test
     public void testHello() throws Exception {
-        EventSource eventSource = EventSource.target(target("hellosse").register(SseFeature.class)).build();
+        EventSource eventSource = EventSource.target(target("hellosse")
+                .register(SseFeature.class))
+                .build();
 
         eventSource.register(new EventListener() {
             @Override
@@ -37,9 +39,9 @@ public class HelloSseResourceTest extends JerseyTest {
         eventSource.open();
 
         Stopwatch stopwatch = new Stopwatch().start();
-        while (stopwatch.elapsed(TimeUnit.SECONDS) < 5) {
+        while (stopwatch.elapsed(TimeUnit.SECONDS) < 2) {
         }
 
-        assertThat(message, is("hello"));
+        assertThat(message, is("fake invoice content including 中文"));
     }
 }
