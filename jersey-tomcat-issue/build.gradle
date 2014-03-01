@@ -1,0 +1,50 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: "application"
+apply plugin: 'tomcat'
+
+group = 'com.reproduce.jersey.tomcat.issue'
+version = '1.0.0'
+
+mainClassName = 'com.reproduce.jersey.tomcat.issue.Launcher'
+
+ext.tomcatVersion = '7.0.52'
+ext.jerseryVersion = '2.5.1'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:1.0'
+    }
+}
+
+run {
+    standardInput = System.in
+}
+
+tomcatRun {
+    httpPort = 8051
+    contextPath = ''
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
+    tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
+        exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
+    }
+
+    compile "javax.ws.rs:javax.ws.rs-api:2.0"
+    compile "org.glassfish.jersey.core:jersey-server:$jerseryVersion"
+    compile "org.glassfish.jersey.media:jersey-media-moxy:$jerseryVersion"
+    compile "org.glassfish.jersey.media:jersey-media-sse:$jerseryVersion"
+    compile "org.glassfish.jersey.containers:jersey-container-grizzly2-http:$jerseryVersion"
+    compile "org.glassfish.jersey.containers:jersey-container-servlet:$jerseryVersion"
+}
