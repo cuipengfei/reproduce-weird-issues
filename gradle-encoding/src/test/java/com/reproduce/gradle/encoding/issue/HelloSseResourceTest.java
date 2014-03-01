@@ -20,7 +20,7 @@ public class HelloSseResourceTest extends JerseyTest {
 
     @Override
     protected Application configure() {
-        return new ResourceConfig().register(HelloResource.class).register(SseFeature.class);
+        return new ResourceConfig().register(HelloSseResource.class).register(SseFeature.class);
     }
 
     @Test
