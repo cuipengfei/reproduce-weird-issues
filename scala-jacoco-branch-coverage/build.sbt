@@ -1,5 +1,5 @@
 import de.johoop.jacoco4sbt.JacocoPlugin.jacoco
-import de.johoop.jacoco4sbt.Thresholds
+import de.johoop.jacoco4sbt.{ScalaHTMLReport, Thresholds}
 
 organization := "cpf"
 
@@ -20,3 +20,6 @@ libraryDependencies ++= Seq(
 jacoco.settings
 
 jacoco.thresholds in jacoco.Config := Thresholds(instruction = 80, branch = 80, line = 80, clazz = 80, method = 80, complexity = 80)
+
+jacoco.reportFormats in jacoco.Config := Seq(
+  ScalaHTMLReport(withBranchCoverage = true))
