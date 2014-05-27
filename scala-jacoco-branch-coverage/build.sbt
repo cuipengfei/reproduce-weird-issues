@@ -1,3 +1,6 @@
+import de.johoop.jacoco4sbt.JacocoPlugin.jacoco
+import de.johoop.jacoco4sbt.Thresholds
+
 organization := "cpf"
 
 name := "branch-coverage"
@@ -6,10 +9,14 @@ version := "1.0"
 
 resolvers += "alfresco release" at "https://maven.alfresco.com/nexus/content/groups/public/"
 
+resolvers ++= Seq(Resolver.sonatypeRepo("snapshots"),
+  Resolver.sonatypeRepo("releases"))
+
 libraryDependencies ++= Seq(
-  "junit" % "junit" % "4.11" % "test"
+  "junit" % "junit" % "4.11" % "test",
+  "org.specs2" %% "specs2" % "2.1.1" % "test"
 )
 
 jacoco.settings
 
-testOptions in Test += Tests.Argument("junitxml", "console")
+jacoco.thresholds in jacoco.Config := Thresholds(instruction = 80, branch = 80, line = 80, clazz = 80, method = 80, complexity = 80)
