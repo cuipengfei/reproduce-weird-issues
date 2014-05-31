@@ -21,8 +21,8 @@ object CoalBoss {
     }
   }
 
-  def loadAndKeepGoing(lastTruck: CoalTruck, firstPile: CoalPile, piles: Seq[CoalPile],
-                       trucks: Seq[CoalTruck]): Seq[CoalTruck] = {
+  private def loadAndKeepGoing(lastTruck: CoalTruck, firstPile: CoalPile, piles: Seq[CoalPile],
+                               trucks: Seq[CoalTruck]): Seq[CoalTruck] = {
     if (lastTruck.spaceLeft == firstPile.weight) {
       lastTruck.load(firstPile)
       loadOneByOne(piles.tail, trucks :+ CoalTruck(List()))
