@@ -16,6 +16,11 @@ class CoalTruckSpec extends Specification {
       fullTruck.isFull === false
     }
 
+    "tell how much space is left" in {
+      val fullTruck = CoalTruck(List(CoalPile(5), CoalPile(1), CoalPile(3)))
+      fullTruck.spaceLeft must beCloseTo(0.9, 0.01)
+    }
+
   }
 
 }
