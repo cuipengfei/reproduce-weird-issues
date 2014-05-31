@@ -11,6 +11,10 @@ case class CoalTruck(piles: Seq[CoalPile]) {
     maxWeight - occupiedSpace
   }
 
+  def load(pile: CoalPile): CoalTruck = {
+    CoalTruck(piles :+ pile)
+  }
+
   private def occupiedSpace: Double = {
     piles.map(_.weight).sum
   }

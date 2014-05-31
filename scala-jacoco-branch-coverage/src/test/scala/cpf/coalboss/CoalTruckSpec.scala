@@ -12,13 +12,21 @@ class CoalTruckSpec extends Specification {
     }
 
     "tell if it is not full" in {
-      val fullTruck = CoalTruck(List(CoalPile(5), CoalPile(1), CoalPile(3)))
-      fullTruck.isFull === false
+      val notFullTruck = CoalTruck(List(CoalPile(5), CoalPile(1), CoalPile(3)))
+      notFullTruck.isFull === false
     }
 
     "tell how much space is left" in {
-      val fullTruck = CoalTruck(List(CoalPile(5), CoalPile(1), CoalPile(3)))
-      fullTruck.spaceLeft must beCloseTo(0.9, 0.01)
+      val truck = CoalTruck(List(CoalPile(5), CoalPile(1), CoalPile(3)))
+      truck.spaceLeft must beCloseTo(0.9, 0.01)
+    }
+
+    "load pile" in {
+      val truck = CoalTruck(List(CoalPile(5), CoalPile(1), CoalPile(3)))
+      val truckAfterLoad = truck.load(CoalPile(0.5))
+
+      truckAfterLoad.spaceLeft must beCloseTo(0.4, 0.01)
+      truckAfterLoad.piles.last.weight === 0.5
     }
 
   }
