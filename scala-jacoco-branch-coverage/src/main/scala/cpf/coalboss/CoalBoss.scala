@@ -10,18 +10,21 @@ object CoalBoss {
       trucks
     }
     else {
-      if (!trucks.last.isFull) {
-        if (trucks.last.spaceLeft == piles.head.weight) {
-          val loadedTruck = trucks.last.load(piles.head)
+      val lastTruck = trucks.last
+      val firstPile = piles.head
+      
+      if (!lastTruck.isFull) {
+        if (lastTruck.spaceLeft == firstPile.weight) {
+          val loadedTruck = lastTruck.load(firstPile)
           loadPileByPile(piles.tail, trucks.dropRight(1) :+ loadedTruck :+ CoalTruck(List()))
         }
-        else if (trucks.last.spaceLeft > piles.head.weight) {
-          val notFullyLoadedTruck = trucks.last.load(piles.head)
+        else if (lastTruck.spaceLeft > firstPile.weight) {
+          val notFullyLoadedTruck = lastTruck.load(firstPile)
           loadPileByPile(piles.tail, trucks.dropRight(1) :+ notFullyLoadedTruck)
         }
         else {
-          val (splitPile, remainingPile) = piles.head.split(trucks.last.spaceLeft)
-          val loadedTruck = trucks.last.load(splitPile)
+          val (splitPile, remainingPile) = firstPile.split(lastTruck.spaceLeft)
+          val loadedTruck = lastTruck.load(splitPile)
           loadPileByPile(piles.tail :+ remainingPile, trucks.dropRight(1) :+ loadedTruck :+ CoalTruck(List()))
         }
       } else {
