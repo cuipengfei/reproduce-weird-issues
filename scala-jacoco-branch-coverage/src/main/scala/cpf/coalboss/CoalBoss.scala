@@ -14,38 +14,30 @@ object CoalBoss {
       val firstPile = piles.head
 
       if (!lastTruck.isFull) {
-        if (lastTruck.spaceLeft == firstPile.weight) {
-          loadCurrentTruckAndAddNewEmptyTruck(lastTruck, firstPile, piles, trucks)
-        }
-        else if (lastTruck.spaceLeft > firstPile.weight) {
-          loadCurrentTruck(lastTruck, firstPile, piles, trucks)
-        }
-        else {
-          splitLoadAndAddNewTruck(lastTruck, firstPile, piles, trucks)
-        }
+        loadAndKeepGoing(lastTruck, firstPile, piles, trucks)
       } else {
         loadOneByOne(piles, trucks :+ CoalTruck(List()))
       }
     }
   }
 
-  private def splitLoadAndAddNewTruck(lastTruck: CoalTruck, firstPile: CoalPile,
-                                      piles: Seq[CoalPile], trucks: Seq[CoalTruck]): Seq[CoalTruck] = {
-    val (splitPile, remainingPile) = firstPile.split(lastTruck.spaceLeft)
-    lastTruck.load(splitPile)
 
-    loadOneByOne(piles.tail :+ remainingPile, trucks :+ CoalTruck(List()))
+  def loadAndKeepGoing(lastTruck: CoalTruck, firstPile: CoalPile, piles: Seq[CoalPile],
+                       trucks: Seq[CoalTruck]): Seq[CoalTruck] = {
+    if (lastTruck.spaceLeft == firstPile.weight) {
+      lastTruck.load(firstPile)
+      loadOneByOne(piles.tail, trucks :+ CoalTruck(List()))
+    }
+    else if (lastTruck.spaceLeft > firstPile.weight) {
+      lastTruck.load(firstPile)
+      loadOneByOne(piles.tail, trucks)
+    }
+    else {
+      val (splitPile, remainingPile) = firstPile.split(lastTruck.spaceLeft)
+      lastTruck.load(splitPile)
+
+      loadOneByOne(piles.tail :+ remainingPile, trucks :+ CoalTruck(List()))
+    }
   }
 
-  private def loadCurrentTruck(lastTruck: CoalTruck, firstPile: CoalPile,
-                               piles: Seq[CoalPile], trucks: Seq[CoalTruck]): Seq[CoalTruck] = {
-    lastTruck.load(firstPile)
-    loadOneByOne(piles.tail, trucks)
-  }
-
-  private def loadCurrentTruckAndAddNewEmptyTruck(lastTruck: CoalTruck, firstPile: CoalPile,
-                                                  piles: Seq[CoalPile], trucks: Seq[CoalTruck]): Seq[CoalTruck] = {
-    lastTruck.load(firstPile)
-    loadOneByOne(piles.tail, trucks :+ CoalTruck(List()))
-  }
 }
