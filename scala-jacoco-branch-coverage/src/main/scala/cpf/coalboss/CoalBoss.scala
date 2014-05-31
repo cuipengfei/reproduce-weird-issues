@@ -32,19 +32,20 @@ object CoalBoss {
   private def splitLoadAndAddNewTruck(lastTruck: CoalTruck, firstPile: CoalPile,
                                       piles: Seq[CoalPile], trucks: Seq[CoalTruck]): Seq[CoalTruck] = {
     val (splitPile, remainingPile) = firstPile.split(lastTruck.spaceLeft)
-    val loadedTruck = lastTruck.load(splitPile)
-    loadOneByOne(piles.tail :+ remainingPile, trucks.dropRight(1) :+ loadedTruck :+ CoalTruck(List()))
+    lastTruck.load(splitPile)
+
+    loadOneByOne(piles.tail :+ remainingPile, trucks :+ CoalTruck(List()))
   }
 
   private def loadCurrentTruck(lastTruck: CoalTruck, firstPile: CoalPile,
                                piles: Seq[CoalPile], trucks: Seq[CoalTruck]): Seq[CoalTruck] = {
-    val notFullyLoadedTruck = lastTruck.load(firstPile)
-    loadOneByOne(piles.tail, trucks.dropRight(1) :+ notFullyLoadedTruck)
+    lastTruck.load(firstPile)
+    loadOneByOne(piles.tail, trucks)
   }
 
   private def loadCurrentTruckAndAddNewEmptyTruck(lastTruck: CoalTruck, firstPile: CoalPile,
                                                   piles: Seq[CoalPile], trucks: Seq[CoalTruck]): Seq[CoalTruck] = {
-    val loadedTruck = lastTruck.load(firstPile)
-    loadOneByOne(piles.tail, trucks.dropRight(1) :+ loadedTruck :+ CoalTruck(List()))
+    lastTruck.load(firstPile)
+    loadOneByOne(piles.tail, trucks :+ CoalTruck(List()))
   }
 }

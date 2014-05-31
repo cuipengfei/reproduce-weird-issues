@@ -1,6 +1,6 @@
 package cpf.coalboss
 
-case class CoalTruck(piles: Seq[CoalPile]) {
+case class CoalTruck(var piles: Seq[CoalPile]) {
   val maxWeight = 9.9
 
   def isFull: Boolean = {
@@ -11,8 +11,8 @@ case class CoalTruck(piles: Seq[CoalPile]) {
     maxWeight - occupiedSpace
   }
 
-  def load(pile: CoalPile): CoalTruck = {
-    CoalTruck(piles :+ pile)
+  def load(pile: CoalPile) = {
+    piles = piles :+ pile
   }
 
   private def occupiedSpace: Double = {

@@ -23,10 +23,10 @@ class CoalTruckSpec extends Specification {
 
     "load pile" in {
       val truck = CoalTruck(List(CoalPile(5), CoalPile(1), CoalPile(3)))
-      val truckAfterLoad = truck.load(CoalPile(0.5))
+      truck.load(CoalPile(0.5))
 
-      truckAfterLoad.spaceLeft must beCloseTo(0.4, 0.01)
-      truckAfterLoad.piles.last.weight === 0.5
+      truck.spaceLeft must beCloseTo(0.4, 0.01)
+      truck.piles.last.weight === 0.5
     }
 
   }
