@@ -1,6 +1,7 @@
 package cpf.coalboss
 
 object CoalBoss {
+
   def loadTrucks(piles: Seq[CoalPile]): Seq[CoalTruck] = {
     loadOneByOne(piles, List(CoalTruck(List())))
   }
@@ -10,19 +11,18 @@ object CoalBoss {
       trucks
     }
     else {
-      val lastTruck = trucks.last
-      val firstPile = piles.head
-
-      if (!lastTruck.isFull) {
-        loadAndKeepGoing(lastTruck, firstPile, piles, trucks)
+      if (!trucks.last.isFull) {
+        loadAndKeepGoing(piles, trucks)
       } else {
         loadOneByOne(piles, trucks :+ CoalTruck(List()))
       }
     }
   }
 
-  private def loadAndKeepGoing(lastTruck: CoalTruck, firstPile: CoalPile, piles: Seq[CoalPile],
-                               trucks: Seq[CoalTruck]): Seq[CoalTruck] = {
+  private def loadAndKeepGoing(piles: Seq[CoalPile], trucks: Seq[CoalTruck]): Seq[CoalTruck] = {
+    val lastTruck = trucks.last
+    val firstPile = piles.head
+
     if (lastTruck.spaceLeft == firstPile.weight) {
       lastTruck.load(firstPile)
       loadOneByOne(piles.tail, trucks :+ CoalTruck(List()))
