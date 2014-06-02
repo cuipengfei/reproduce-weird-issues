@@ -35,7 +35,7 @@ object CoalBoss {
       val (splitPile, remainingPile) = firstPile.split(lastTruck.spaceLeft)
       lastTruck.load(splitPile)
 
-      loadOneByOne(piles.tail :+ remainingPile, trucks :+ CoalTruck(List()))
+      loadOneByOne(remainingPile +: piles.tail, trucks :+ CoalTruck(List()))
     }
   }
 
