@@ -2,8 +2,11 @@ package cpf.coalboss
 
 import org.specs2.mutable.Specification
 import org.specs2.matcher.MatchResult
+import org.specs2.ScalaCheck
+import org.scalacheck.Gen
+import org.scalacheck.Prop
 
-class CoalBossSpec extends Specification {
+class CoalBossSpec extends Specification with ScalaCheck {
 
   "coal boss" should {
 
@@ -28,6 +31,28 @@ class CoalBossSpec extends Specification {
       truckMustContain(trucks.last, 2.4)
     }
 
+  }
+
+  val pileGenerator = for {
+    weight <- Gen.choose(0.0, 20.0)
+  } yield CoalPile(weight)
+  val pilesGenerator = Gen.containerOf[List, CoalPile](pileGenerator)
+
+  "n-1 trucks should be full and one may not be full" ! Prop.forAll(pilesGenerator) {
+
+    (piles: List[CoalPile]) => val trucks = CoalBoss.loadTrucks(piles)
+      val firstNMinusOneTrucks = trucks.dropRight(1)
+
+      println("---start testing property---")
+      println(piles)
+      println(trucks)
+      println("---end testing property---")
+      //ScalaCheck generates 100 test cases for us
+      //each test case has some random piles
+
+      firstNMinusOneTrucks.foreach(truck => truck.spaceLeft must beCloseTo(0, 0.01))
+
+      trucks.last.spaceLeft must beLessThanOrEqualTo(9.9)
   }
 
   private def truckMustContain(truck: CoalTruck, expectedWeights: Double*): Seq[MatchResult[Any]] = {
