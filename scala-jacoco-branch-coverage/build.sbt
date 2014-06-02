@@ -14,7 +14,7 @@ resolvers ++= Seq(Resolver.sonatypeRepo("snapshots"),
 
 libraryDependencies ++= Seq(
   "junit" % "junit" % "4.11" % "test",
-  "org.specs2" %% "specs2" % "2.1.1" % "test"
+  "org.specs2" % "specs2_2.10" % "2.3.12-scalaz-7.1.0-M6"
 )
 
 jacoco.settings
