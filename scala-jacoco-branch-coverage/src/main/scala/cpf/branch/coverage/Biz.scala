@@ -2,15 +2,11 @@ package cpf.branch.coverage
 
 class Biz {
 
-  def doBiz(inputMsg: String): String = {
-    delegateService(inputMsg) match {
-      case OKResult(result) => result.toString
-      case FailureResult(error) => error
+  def doBiz(result: Result): String = {
+    result match {
+      case OKResult(msg) => msg
+      case FailureResult(msg) => msg
     }
   }
 
-  private def delegateService(msg: String): Result = {
-    if (msg.length > 5) OKResult("message length ok")
-    else FailureResult("message too short")
-  }
 }

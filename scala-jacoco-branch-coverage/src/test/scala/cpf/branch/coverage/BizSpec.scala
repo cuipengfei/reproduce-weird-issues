@@ -4,12 +4,16 @@ import org.specs2.mutable.Specification
 
 class BizSpec extends Specification {
   "biz" should {
-    "work fine when message longer than 5" in {
-      new Biz().doBiz("123456") === "message length ok"
+    "work fine" in {
+      new Biz().doBiz(OKResult("whatever")) === "whatever"
     }
 
-    "fail when message is 5 chars or less" in {
-      new Biz().doBiz("12345") === "message too short"
+    "fail" in {
+      new Biz().doBiz(FailureResult("oops")) === "oops"
+    }
+
+    "fail when no match" in {
+      new Biz().doBiz(null) must throwA[MatchError]
     }
   }
 }
