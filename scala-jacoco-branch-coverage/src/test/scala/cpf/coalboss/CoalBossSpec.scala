@@ -43,13 +43,6 @@ class CoalBossSpec extends Specification with ScalaCheck {
     (piles: List[CoalPile]) => val trucks = CoalBoss.loadTrucks(piles)
       val firstNMinusOneTrucks = trucks.dropRight(1)
 
-      println("---start testing property---")
-      println(piles)
-      println(trucks)
-      println("---end testing property---")
-      //ScalaCheck generates 100 test cases for us
-      //each test case has some random piles
-
       firstNMinusOneTrucks.foreach(truck => truck.spaceLeft must beCloseTo(0, 0.01))
 
       trucks.last.spaceLeft must beLessThanOrEqualTo(9.9)
